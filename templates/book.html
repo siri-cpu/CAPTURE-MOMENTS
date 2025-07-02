@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Photographer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .photographer-card { cursor: pointer; transition: transform 0.2s; }
+        .photographer-card:hover { transform: scale(1.02); }
+        input[type="radio"] { display: none; }
+        input[type="radio"]:checked + .card {
+            border: 2px solid #28a745;
+            box-shadow: 0 0 10px #28a745;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+            <h2 class="text-center text-success mb-4">📅 Book a Photographer</h2>
+            <form method="POST">
+                <div class="row">
+                    {% for p in photographers %}
+                    <div class="col-md-6 mb-4">
+                        <label>
+                            <input type="radio" name="photographer_id" value="{{ p.id }}" required>
+                            <div class="card photographer-card">
+                                <img src="{{ url_for('static', filename='images/' ~ p.image) }}" class="card-img-top" style="height: 250px; object-fit: cover;" alt="{{ p.name }}">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ p.name }}</h5>
+                                    <p class="card-text">{{ p.skills | join(', ') }}</p>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    <label>Select Date:</label>
+                    <input type="date" name="date" class="form-control" required>
+                </div>
+                <button class="btn btn-success w-100">Confirm Booking</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="/real-home" class="btn btn-outline-secondary">← Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
