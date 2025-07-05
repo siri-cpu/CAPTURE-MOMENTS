@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime
 
 # Step 1: Create the Flask app instance
-app = Flask(__name__)
+app = Flask (__name__)
 
 # Step 2: Connect to DynamoDB
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')  # Replace with your region
